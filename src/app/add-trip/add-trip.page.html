@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>add-trip</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="airplane"></ion-icon>
+      <ion-card-title>Create a Trip</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Destination</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Departure Date</ion-label>
+        <ion-datetime display-format="MMM DD, YYYY" picker-format="MMM DD, YYYY"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Duration</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" color="primary">Create</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

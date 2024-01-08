@@ -13,4 +13,16 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./register/register.page').then( m => m.RegisterPage)
   },
+  {
+    path: 'add-place',
+    loadComponent: () => import('./add-place/add-place.page').then( m => m.AddPlacePage)
+  },
+  {
+    path: 'add-trip',
+    loadComponent: () => import('./add-trip/add-trip.page').then( m => m.AddTripPage)
+  },
+  {
+    path: 'edit-trips-places',
+    loadComponent: () => import('./edit-trips-places/edit-trips-places.page').then( m => m.EditTripsPlacesPage)
+  },
 ];
