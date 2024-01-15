@@ -28,13 +28,13 @@ export class AddPlacePage implements OnInit {
 
   // places: any[] = []; // Declare the 'places' property
 
-  addPlace(){
-    //🚧🚧🚧 c'est quoi places ? 
-    this.placesServiceService.getPlace().subscribe({
-      next: place => this.places.push(place), // Use the 'places' property
-      error: err => console.log(err),
-    })
-  }
+  // addPlace(){
+  //   //🚧🚧🚧 c'est quoi places ? 
+  //   this.placesServiceService.getPlace().subscribe({
+  //     next: place => this.places.push(place), // Use the 'places' property
+  //     error: err => console.log(err),
+  //   })
+  // }
 
   async onCreatePlace(placeForm: any) {
     // //création du header
@@ -53,7 +53,7 @@ export class AddPlacePage implements OnInit {
       // } catch (error) {
       //   console.error('API Error:', error);
       // }
-      console.log('data', this.places)
+      // console.log('data', this.places)
 
 
 
