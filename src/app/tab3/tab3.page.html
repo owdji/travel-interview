@@ -1,9 +1,9 @@
 <!-- On doit utiliser ion-item "Actions" pour cette partie -->
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> My trips </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -12,5 +12,18 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- Iterate over each trip in the 'trips' array -->
+  <ion-card *ngFor="let trip of trips">
+    <!-- Use trip attributes for image source, card title, and card subtitle -->
+    <!-- <img [src]="trip.href" alt="Silhouette of mountains" /> -->
+    <img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="Silhouette of mountains" />
+
+    <ion-card-header>
+      <ion-card-title>{{ trip.title }}</ion-card-title>
+      <ion-card-subtitle>{{ trip.href }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
 </ion-content>
+
+
