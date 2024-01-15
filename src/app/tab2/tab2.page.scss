@@ -1,6 +1,18 @@
 .map {
-	height: 100%;
+	height: 50%;
 	display: flex;
-	align-items: center; //centraliza horizontalmente
-	justify-content: center; //centraliza verticalmente
+	align-items: center;
+	justify-content: center;
+}
+
+ion-content {
+    height: 100%;
+  }
+
+.marker {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #3880ff;
+    border: 3px solid #fff;
 }

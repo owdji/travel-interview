@@ -11,5 +11,10 @@
     </ion-toolbar>
   </ion-header>
   <app-explore-container name="Map"></app-explore-container>
-  <div id="map" class="map"></div>
+  <div id="map" style="width: 100%; height: 100%"></div>
+  <div
+    id="marker"
+    style="width: 20px; height: 20px; background-color: red; border-radius: 50%"
+  ></div>
+  <ion-button (click)="toggleGeolocation()">Toggle Geolocation</ion-button>
 </ion-content>
