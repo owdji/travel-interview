@@ -1,3 +1,5 @@
+export type TripResponseArray = TripResponse[];
+
 export type TripResponse = {
     createdAt: string;
     id: string;
