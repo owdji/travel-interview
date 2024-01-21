@@ -9,6 +9,7 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { IonicModule } from '@ionic/angular';
 import { TripService } from '../services/trips-service.service';
 import { TripResponse } from '../models/trip-response.type';
+import { PlaceResponse } from '../models/place-response.type'; // added
 import { CommonModule } from '@angular/common';
 
 @Component({

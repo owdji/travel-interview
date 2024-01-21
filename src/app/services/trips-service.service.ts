@@ -3,28 +3,30 @@ import { Observable, map, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { PlaceResponse } from '../models/place-response.type';
 import { TripResponse, TripResponseArray } from '../models/trip-response.type';
+import { PlacesService } from './places-service.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripService {
+
   private apiUrl = 'https://comem-travel-log-api-2hr8.onrender.com/api/trips';
 
-    constructor(private http: HttpClient) { }
-    getTrips(): Observable<TripResponseArray> {
-      return this.http
-        .get<TripResponseArray>(this.apiUrl)
-        .pipe(
-          map((trips: TripResponseArray) => trips.map((trip: TripResponse) => ({
-            ...trip,
-            places: this.getPlacesForTrip(trip.id)
-          })))
-        );
-    }
-  
-    private getPlacesForTrip(tripId: string): PlaceResponse[] {
-      // TODO: Implement this method to retrieve the places for a given trip
-      // For now, we'll just return an empty array
-      return [];
-    }
+  constructor(private http: HttpClient, private placesService: PlacesService) { }
+
+  getTrips(): Observable<TripResponse[]> {
+    return this.http.get<TripResponse[]>(this.apiUrl);
+  }
+
+  getTrip(id: number): Observable<TripResponse> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<TripResponse>(url);
+  }
+
+  // a faire plus tard ne marche pas encore...
+  // getPlacesForTrip(tripId: number): Observable<PlaceResponse[]> {
+  //   const placesUrl = `${this.placesService.apiUrl}/${tripId}`;
+  //   return this.placesService.getPlaces();
+  // }
 }

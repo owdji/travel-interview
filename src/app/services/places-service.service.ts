@@ -4,21 +4,21 @@ import { Observable, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PlaceResponse } from '../models/place-response.type';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class PlaceService {
-//   constructor(private http: HttpClient) { }
+@Injectable({
+  providedIn: 'root'
+})
+export class PlacesService {
 
-//   getPlace(): Observable<PlaceResponse> {
-//     return this.http
-//       .get<PlaceResponse>('https://comem-travel-log-api-2hr8.onrender.com/api/places')
-//       .pipe(map(convertPlaceResponseToPlace));
-//   }
-// }
+  private apiUrl = 'https://comem-travel-log-api-2hr8.onrender.com/api/places';
 
-// function convertPlaceResponseToPlace(response: PlaceResponse): Placere {
-//   return {
-//     text: response.name,
-//   }
-// }
+  constructor(private http: HttpClient) { }
+
+  getPlaces(): Observable<PlaceResponse[]> {
+    return this.http.get<PlaceResponse[]>(this.apiUrl);
+  }
+
+  getPlace(id: number): Observable<PlaceResponse> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<PlaceResponse>(url);
+  }
+}

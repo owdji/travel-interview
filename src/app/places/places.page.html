@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Places</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Places</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngFor="let place of places">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card-header>
+            <ion-card-title>{{ place.name }}</ion-card-title>
+            <ion-card-subtitle>{{ place.description }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-content> Numéro du voyage : {{ place.tripId }}</ion-card-content>
+        </ion-col>
+        <ion-col>
+          <img
+            src="{{ place.pictureUrl }}"
+            alt="{{ place.name }}"
+            style="width: 200px; height: 200px;"
+          />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

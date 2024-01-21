@@ -25,4 +25,8 @@ export const routes: Routes = [
     path: 'edit-trips-places',
     loadComponent: () => import('./edit-trips-places/edit-trips-places.page').then( m => m.EditTripsPlacesPage)
   },
+  {
+    path: 'places',
+    loadComponent: () => import('./places/places.page').then( m => m.PlacesPage)
+  },
 ];

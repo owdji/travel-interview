@@ -1,7 +1,12 @@
 <ion-content [fullscreen]="true">
   <!-- Iterate over each trip in the 'trips' array -->
   <ion-card *ngFor="let trip of trips">
-    <img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="Silhouette of mountains" width="60" height="60"/>
+    <img
+      src="https://ionicframework.com/docs/img/demos/card-media.png"
+      alt="Silhouette of mountains"
+      width="60"
+      height="60"
+    />
 
     <ion-grid>
       <ion-row>
@@ -14,9 +19,15 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-card-content>Nombre de lieu visité {{ trip.placesCount }}</ion-card-content>
-          <ion-card-content>Date du voyage {{ trip.createdAt }}</ion-card-content>
-          <ion-card-content>Voyage de {{ trip.userId }}</ion-card-content>
+          <ion-card-content
+            >Nombre de lieu visité : {{ trip.placesCount }}</ion-card-content
+          >
+          <ion-card-content
+            >Date du voyage : {{ trip.createdAt }}</ion-card-content
+          >
+          <ion-card-content
+            >Voyage de l'utilisateur : {{ trip.userId }}</ion-card-content
+          >
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -1,11 +1,8 @@
-export type PlaceResponse = {
-    id: string;
+export interface PlaceResponse {
+    id: number;
     name: string;
     description: string;
-    location: string;
-    //à ajouter
-    // tripeHref: string;
-    // tripId: string;
-    // pictureUrl: string;
-
-};
+    pictureUrl: string;
+    tripId: number;
+    tripHref: string;
+  }
