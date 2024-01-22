@@ -1,18 +1,29 @@
-.map {
-	height: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+@import "node_modules/ol/ol.css";
+
+#geoButton {
+   //align the button center
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.place-marker {
+  font-size: 20px;
+  color: #00f; 
+  cursor: pointer;
 }
 
 ion-content {
     height: 100%;
   }
 
-.marker {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #3880ff;
-    border: 3px solid #fff;
+.marker{
+  font-size: 40px;
 }
+  
+
+  #map {
+    height: 80%;
+    width: 100%;
+    display: block;
+  }

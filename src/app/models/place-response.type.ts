@@ -5,4 +5,8 @@ export interface PlaceResponse {
     pictureUrl: string;
     tripId: number;
     tripHref: string;
+    location: {
+      type: string;
+      coordinates: number[];
+    };
   }
