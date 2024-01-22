@@ -8,7 +8,8 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './app/auth.interceptor';
 import { IonicStorageModule } from "@ionic/storage-angular";
 // import { provideHttpClient } from '@angular/core';
 
@@ -24,5 +25,6 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     provideRouter(routes),
     importProvidersFrom(IonicStorageModule.forRoot()),
+    provideHttpClient(withInterceptors([ authInterceptor ])),
   ],
 });
