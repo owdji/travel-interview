@@ -11,6 +11,7 @@ import { TripService } from '../services/trips-service.service';
 import { TripResponse } from '../models/trip-response.type';
 import { PlaceResponse } from '../models/place-response.type'; // added
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -23,8 +24,12 @@ import { CommonModule } from '@angular/common';
 export class Tab3Page {
   trips: TripResponse[];
 
-  constructor(private tripService: TripService) {
+  constructor(
+    private tripService: TripService,
+    private router: Router, // Inject the Router service
+    ) {
     this.trips = [];
+    
   }
 
   getTrips() {
@@ -61,6 +66,22 @@ export class Tab3Page {
     console.log("ca marche", trip);
     this.trips.push(trip);
   }
+
+  navigateToAddPlace(){
+    this.router.navigate(['/add-trip']);
+  }
+
+  deleteTrip(trip: any) {
+    console.log('tripId', trip.id, trip.title);
+    this.tripService.deleteTrip(trip.id).subscribe({
+      next: () => {
+        // Remove the deleted trip from the local array
+        this.trips = this.trips.filter(t => t.id !== trip.id);
+      },
+      error: (err) => console.log(err),
+    });
+  }
+  
 
   ngOnInit() {
     //console.log each object of the array one by one

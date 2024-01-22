@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <!-- <ion-card>
     <ion-card-header>
       <ion-icon name="airplane"></ion-icon>
       <ion-card-title>Create a Trip</ion-card-title>
@@ -29,5 +29,16 @@
 
       <ion-button expand="full" color="primary">Create</ion-button>
     </ion-card-content>
-  </ion-card>
-</ion-content>
+  </ion-card> -->
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input type="text" [(ngModel)]="tripTitle"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input type="text" [(ngModel)]="tripDescription"></ion-input>
+    </ion-item>
+  
+    <ion-button expand="full" color="primary" (click)="postTrip()">Create Trip</ion-button>
+  </ion-content>
