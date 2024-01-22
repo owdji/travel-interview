@@ -11,24 +11,54 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-item>
-      <ion-label>Name</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+  <ion-card
+    ><form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
+      <ion-item>
+        <!-- Username input -->
+        <ion-input
+          label="Username"
+          labelPlacement="floating"
+          inputmode="text"
+          #username="ngModel"
+          required="true"
+          name="username"
+          [(ngModel)]="authRequest.username"
+        ></ion-input>
+        <!-- Error message displayed if the username is invalid -->
+        <ion-text color="danger" *ngIf="username.invalid && username.touched"
+          >Username is required.</ion-text
+        >
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
+      <ion-item>
+        <!-- Password input -->
+        <ion-input
+          label="Password"
+          labelPlacement="floating"
+          inputmode="text"
+          #password="ngModel"
+          required="true"
+          type="password"
+          name="password"
+          [(ngModel)]="authRequest.password"
+        ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-button color="primary" size="medium">Login</ion-button>
-    </ion-item>
+      <ion-item>
+        <!-- Submit button -->
+        <ion-button type="submit" expand="block" [disabled]="loginForm.invalid"
+          >Log in</ion-button
+        >
 
-    <ion-item>
-      <p>Don't have an account? <a href="/register">Register</a></p>
-    </ion-item>
+        <!-- Error message displayed if the login failed -->
+        <ion-text color="danger" *ngIf="loginError"
+          >Username or password is invalid.</ion-text
+        >
+      </ion-item>
+
+      <ion-item>
+        <p>Don't have an account? <a href="/register">Register</a></p>
+      </ion-item>
+    </form>
   </ion-card>
-
 </ion-content>

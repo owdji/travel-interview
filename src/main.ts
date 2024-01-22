@@ -9,6 +9,7 @@ import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { IonicStorageModule } from "@ionic/storage-angular";
 // import { provideHttpClient } from '@angular/core';
 
 if (environment.production) {
@@ -22,5 +23,6 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideHttpClient(),
     provideRouter(routes),
+    importProvidersFrom(IonicStorageModule.forRoot()),
   ],
 });
