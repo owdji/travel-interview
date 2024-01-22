@@ -1,15 +1,15 @@
 export type TripResponseArray = TripResponse[];
 
 export interface TripResponse {
-    id: string;
-    href: string;
+    id?: string;
+    href?: string;
     title: string;
     description: string;
-    userId: string;
-    createdAt: string;
-    updatedAt: string;
-    places: PlaceResponse[];
-    placesCount: number;
+    userId?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    places?: PlaceResponse[];
+    placesCount?: number;
   }
   
   interface PlaceResponse {

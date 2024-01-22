@@ -17,38 +17,8 @@ import { TripService } from '../services/trips-service.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class AddPlacePage implements OnInit {
-  // apiUrl = 'https://comem-travel-log-api-2hr8.onrender.com/api/places';
-  // //token d'authentification codée en dur pour l'instant
-  // authToker='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDYwMDI1ODAuMTM0LCJzdWIiOiI0NWY5NzE2Yy1kYmJjLTQzOTktYWY1Yy02OTdmNmFkNDYwMzIiLCJpYXQiOjE3MDQ3OTI5ODB9.bLbVvEr7jHjrhPl5kJ_LeWtAHqWhmRvJu1ByAyMvDrE'
-  // // places: PlaceResponse[]; 
-  // trips: TripResponse[];
-
 
   @ViewChild('presentAlert', { static: false }) presentAlert: HTMLIonAlertElement | undefined;
-
-  // constructor(private http: HttpClient, private placesServiceService : PlacesServiceService) { }
-    // constructor(private tripService : TripService) {
-    //   this.trips = [];
-    // } 
-    // addPlace(){
-    //   // this.places.push(this.placeService.getPlace());
-    // }
-
-  //   addTrip(){
-  //     this.tripService.getTrip().subscribe(trip => {
-  //       this.trips.push(trip);
-  //     })
-  //   }
-
-  //   getTrip(){
-  //     this.tripService.getTrip().subscribe({
-  //       next: trip => this.trips.push(trip), // Use the 'places' property
-  //       error: err => console.log(err),
-  //     })
-  //     console.log('DATA', this.trips)
-  //   }
-
-
 
   ngOnInit() {
   }

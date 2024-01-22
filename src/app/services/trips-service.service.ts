@@ -29,4 +29,12 @@ export class TripService {
   //   const placesUrl = `${this.placesService.apiUrl}/${tripId}`;
   //   return this.placesService.getPlaces();
   // }
+
+  //POST
+  postTrip(trip: TripResponse): Observable<TripResponse> {
+    //on créer un header et on y met le bearer
+    //(test avec leo leo2000 codé en dur)
+    const headers = new HttpHeaders({ 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcxMjk3NDcuMDEsInN1YiI6ImE2NTA3MTMxLWNjZGMtNGU3Yi04MWNkLTI1YTBhNTkwNmIyOSIsImlhdCI6MTcwNTkyMDE0N30.rN-qkVcZhW9p4wbW8V8gb7Q8IaLQAII39shrqyceEeo'})
+    return this.http.post<TripResponse>(this.apiUrl, trip, {headers});
+  }
 }

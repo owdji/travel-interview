@@ -1,4 +1,6 @@
 <ion-content [fullscreen]="true">
+  <ion-button expand="full" size="large" (click)="postTrip()">Create Trip</ion-button>
+
   <!-- Iterate over each trip in the 'trips' array -->
   <ion-card *ngFor="let trip of trips">
     <img
@@ -32,4 +34,9 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-</ion-content>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
