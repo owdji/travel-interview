@@ -9,6 +9,7 @@ import { AuthService } from "src/app/security/auth.service";
 import { logOut as logOutIcon } from "ionicons/icons";
 import { Router } from "@angular/router";
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
