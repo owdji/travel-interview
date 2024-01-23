@@ -1,29 +1,22 @@
-@import "node_modules/ol/ol.css";
+
 
 #geoButton {
-   //align the button center
+   // Align the button center
    display: flex;
    justify-content: center;
    align-items: center;
 }
 
-.place-marker {
-  font-size: 20px;
-  color: #00f; 
-  cursor: pointer;
+ion-content {
+  height: 100%;
 }
 
-ion-content {
-    height: 100%;
-  }
-
-.marker{
+.marker {
   font-size: 40px;
 }
-  
 
-  #map {
-    height: 80%;
-    width: 100%;
-    display: block;
-  }
+#map {
+  height: 80%;
+  width: 100%;
+  display: block;
+}
