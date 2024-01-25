@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Geolocation } from 'ol';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
@@ -8,24 +8,18 @@ import OSM from 'ol/source/OSM';
 import TileLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import Overlay from 'ol/Overlay';
-import Feature from 'ol/Feature';
-import Point from 'ol/geom/Point';
-import { Icon, Style } from 'ol/style';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { transform } from 'ol/proj';
 import { useGeographic } from 'ol/proj';
 import { PlacesService } from '../services/places-service.service';
 import { PlaceResponse } from '../models/place-response.type';
 
+
 @Component({
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, CommonModule, IonButton],
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, CommonModule, IonButton],
   standalone: true,
 })
-
 
 export class Tab2Page implements OnInit {
   places: PlaceResponse[];
@@ -33,20 +27,13 @@ export class Tab2Page implements OnInit {
   geolocation: Geolocation;
   marker: HTMLElement | null = null;
   map: Map;
-  markerOverlay: Overlay | null = null;
   toggleButtonText = 'Activate Geolocation';
-  vectorLayer: VectorLayer<VectorSource>;
-  vectorSource: VectorSource;
 
 
   constructor(private placesService: PlacesService) {
     this.places = [];
-    this.vectorSource = new VectorSource();
-    this.vectorLayer = new VectorLayer({
-      source: this.vectorSource,
-    });
     this.map = new Map({
-      layers: [new TileLayer({ source: new OSM() }), this.vectorLayer], // Add vectorLayer to the layers
+      layers: [new TileLayer({ source: new OSM() })],
       target: 'map',
       view: new View({
         center: [0, 0],
@@ -74,10 +61,8 @@ export class Tab2Page implements OnInit {
   ngOnInit() {
     useGeographic();
     this.getPlaces();
-
     this.map = new Map({
-      controls: [],
-      layers: [new TileLayer({ source: new OSM() }), this.vectorLayer],
+      layers: [new TileLayer({ source: new OSM() })],
       target: 'map',
       view: new View({
         center: [0, 0],
@@ -100,66 +85,80 @@ export class Tab2Page implements OnInit {
     });
 
     this.addMarker();
+
+    
   }
 
   onChangePosition = () => {
     const coordinates = this.geolocation.getPosition();
     if (coordinates) {
       this.map.getView().setCenter(coordinates);
-      this.map.getView().setZoom(12);
+      this.map.getView().setZoom(12); // Ajustez la valeur de zoom selon vos besoins
       this.addMarker();
     }
   };
-
+  
   onChangeTracking = () => {
     if (!this.geolocation.getTracking()) {
+      // Si le suivi est désactivé, retirer le marqueur de la carte
       this.removeMarker();
+      // Retirer les gestionnaires d'événements
       this.geolocation.un('change:position', this.onChangePosition);
       this.geolocation.un('change:tracking', this.onChangeTracking);
     }
   };
-
+  
   toggleGeolocation() {
     if (this.geolocation) {
       if (!this.geolocationEnabled) {
         console.log('Activation de la géolocalisation');
         this.geolocation.setTracking(true);
-
+  
+        // Ajouter un événement pour détecter le changement de position
         this.geolocation.on('change:position', this.onChangePosition);
+  
+        // Ajouter un événement pour détecter le changement d'état de la géolocalisation
         this.geolocation.on('change:tracking', this.onChangeTracking);
-
+  
+        // Mettre à jour le texte du bouton
         this.toggleButtonText = 'Desactivate Geolocation';
+  
       } else {
         console.log('Désactivation de la géolocalisation');
         this.geolocation.setTracking(false);
-
+  
+        // Retirer le marqueur de la carte
         this.removeMarker();
-
+  
+        // Retirer les gestionnaires d'événements
         this.geolocation.un('change:position', this.onChangePosition);
         this.geolocation.un('change:tracking', this.onChangeTracking);
-
+  
+        // Mettre à jour le texte du bouton
         this.toggleButtonText = 'Activate Geolocation';
       }
-
+  
       this.geolocationEnabled = !this.geolocationEnabled;
     }
   }
-
+  
+  
   removeMarker() {
-    if (this.markerOverlay) {
-      this.map.removeOverlay(this.markerOverlay);
-      this.markerOverlay = null; // Réinitialise la variable
+    if (this.marker) {
+      const markerOverlay = this.map.getOverlayById('marker');
+      if (markerOverlay) {
+        this.map.removeOverlay(markerOverlay);
+      }
+      this.marker.innerHTML = ""; // Réinitialiser le marqueur
       console.log('Marker removed successfully.');
     }
   }
+    
 
   addMarker() {
-    if (this.geolocationEnabled) { // Vérifier si la géolocalisation est activée
-      if (this.markerOverlay) {
-        // Si un overlay existe déjà, le supprimer
-        this.map.removeOverlay(this.markerOverlay);
-      }
+    console.log('Entering addMarker function');
   
+    if (this.geolocation) {
       if (this.geolocation.getAccuracy() === undefined) {
         console.log('Position not yet available. Try again.');
         return;
@@ -179,53 +178,43 @@ export class Tab2Page implements OnInit {
       marker.setAttribute('class', 'marker');
       marker.innerHTML = '📍';
   
+      this.marker = marker;
+
       console.log('Adding marker at coordinates:', coordinates);
+      console.log('Marker element:', marker);
+
   
-      this.markerOverlay = new Overlay({
-        element: marker,
-        positioning: 'center-center',
-        stopEvent: false,
-        offset: [0, 0],
-      });
-  
-      this.markerOverlay.setPosition(coordinates);
-      this.map.addOverlay(this.markerOverlay);
-  
-      console.log('Marker and overlay added successfully.');
-    } else {
-      console.log('Geolocation is not activated.');
-    }
-  }
-  
-
-  addPlaceMarker(place: PlaceResponse) {
-    if (place && place.location && place.location.coordinates) {
-      const coordinates = place.location.coordinates;
-      const image = place.pictureUrl;
-
-      const marker = document.createElement('div');
-      marker.setAttribute('class', 'place-marker');
-      marker.style.width = '70px';
-      marker.style.height = '70px';
-      marker.style.backgroundImage = `url(${image})`;
-      marker.style.backgroundSize = 'cover';
-      marker.style.borderRadius = '50%';
-      marker.style.border = '2px solid #fff';
-
-      //Faudra changer avec les
-      marker.addEventListener('click', () => {
-        window.location.href = `/tabs/tab2/places/${place.id}`;
-      });
-      console.log('image added', marker);
-
-
       const overlay = new Overlay({
         element: marker,
         positioning: 'center-center',
         stopEvent: false,
         offset: [0, 0],
       });
-
+  
+      overlay.setPosition(coordinates);
+      this.map.addOverlay(overlay);
+  
+      console.log('Marker and overlay added successfully.');
+    } else {
+      console.log('Geolocation is not initialized.');
+    }
+  }
+  
+  addPlaceMarker(place: PlaceResponse) {
+    if (place && place.location && place.location.coordinates) {
+      const coordinates = place.location.coordinates;
+  
+      const marker = document.createElement('div');
+      marker.setAttribute('class', 'place-marker');
+      marker.innerHTML = '🏞️';
+  
+      const overlay = new Overlay({
+        element: marker,
+        positioning: 'center-center',
+        stopEvent: false,
+        offset: [0, 0],
+      });
+  
       overlay.setPosition(coordinates);
       this.map.addOverlay(overlay);
     }
