@@ -5,12 +5,19 @@ import { CommonModule } from '@angular/common';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import Map from 'ol/Map';
 import OSM from 'ol/source/OSM';
-import TileLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import Overlay from 'ol/Overlay';
+import { transform } from 'ol/proj';
 import { useGeographic } from 'ol/proj';
 import { PlacesService } from '../services/places-service.service';
 import { PlaceResponse } from '../models/place-response.type';
+import Feature from 'ol/Feature';
+import { Cluster, Vector as VectorSource } from 'ol/source';
+import { Circle as CircleStyle, Fill, Icon, Stroke, Style, Text } from 'ol/style';
+import { LineString, Point, Polygon } from 'ol/geom';
+import { createEmpty, extend, getWidth, getHeight } from 'ol/extent';
+import { fromLonLat } from 'ol/proj';
+import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 
 
 @Component({
@@ -28,7 +35,6 @@ export class Tab2Page implements OnInit {
   marker: HTMLElement | null = null;
   map: Map;
   toggleButtonText = 'Activate Geolocation';
-
 
   constructor(private placesService: PlacesService) {
     this.places = [];
@@ -184,6 +190,43 @@ export class Tab2Page implements OnInit {
       console.log('Marker element:', marker);
 
   
+      this.markerOverlay = new Overlay({
+        element: marker,
+        positioning: 'center-center',
+        stopEvent: false,
+        offset: [0, 0],
+      });
+  
+      this.markerOverlay.setPosition(coordinates);
+      this.map.addOverlay(this.markerOverlay);
+  
+      console.log('Marker and overlay added successfully.');
+    } else {
+      console.log('Geolocation is not activated.');
+    }
+  }
+  
+
+  addPlaceMarker(place: PlaceResponse) {
+    if (place && place.location && place.location.coordinates) {
+      const coordinates = place.location.coordinates;
+      const image = place.pictureUrl;
+
+      const marker = document.createElement('div');
+      marker.setAttribute('class', 'place-marker');
+      marker.style.width = '70px';
+      marker.style.height = '70px';
+      marker.style.backgroundImage = `url(${image})`;
+      marker.style.backgroundSize = 'cover';
+      marker.style.borderRadius = '50%';
+      marker.style.border = '2px solid #fff';
+
+      //Faudra changer avec le lien de la page du lieu
+      marker.addEventListener('click', () => {
+        window.location.href = `/tabs/tab2/places/${place.id}`;
+      });
+      console.log('image added', marker);
+
       const overlay = new Overlay({
         element: marker,
         positioning: 'center-center',

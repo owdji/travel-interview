@@ -5,7 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { TripResponse } from '../models/trip-response.type';
 import { IonFab, IonFabButton, IonIcon, IonFabList, IonButton,  IonButtons} from '@ionic/angular/standalone';
-import { AuthService } from "src/app/security/auth.service";
+// import { AuthService } from "src/app/security/auth.service";
+import { AuthService } from '../security/auth.service';
 import { logOut as logOutIcon } from "ionicons/icons";
 import { Router } from "@angular/router";
 
