@@ -72,18 +72,14 @@ export class Tab3Page {
   }
 
   deleteTrip(trip: any) {
-    // Afficher une boîte de dialogue de confirmation
-    const isConfirmed = window.confirm(`Are you sure you want to delete "${trip.title}" ?`);
-  
-    if (isConfirmed) {
-      this.tripService.deleteTrip(trip.id).subscribe({
-        next: () => {
-          // Retirer le voyage supprimé du tableau local
-          this.trips = this.trips.filter(t => t.id !== trip.id);
-        },
-        error: (err) => console.log(err),
-      });
-    }
+    console.log('tripId', trip.id, trip.title);
+    this.tripService.deleteTrip(trip.id).subscribe({
+      next: () => {
+        // Remove the deleted trip from the local array
+        this.trips = this.trips.filter(t => t.id !== trip.id);
+      },
+      error: (err) => console.log(err),
+    });
   }
   
 
