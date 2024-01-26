@@ -1,13 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import { PlaceService } from '../services/places-service.service';
 // import { Place } from '../models/place.type';
-// import { PlaceResponse } from '../models/place-response.type';
+import { PlaceResponse } from '../models/place-response.type';
 import { TripResponse } from '../models/trip-response.type';
 import { TripService } from '../services/trips-service.service';
+import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { PlacesService } from '../services/places-service.service';
 
 @Component({
   selector: 'app-add-place',
@@ -18,47 +21,61 @@ import { TripService } from '../services/trips-service.service';
 })
 export class AddPlacePage implements OnInit {
 
-  @ViewChild('presentAlert', { static: false }) presentAlert: HTMLIonAlertElement | undefined;
+  @Input() tripName: string = '';
+  @Input() tripId: string = '';
+  @ViewChild('placeForm') placeForm!: NgForm;
+
+  constructor(
+    private PlacesService: PlacesService,
+    private modalController: ModalController,
+    private alertController: AlertController
+  ) { }
+
+  closeModal() {
+    this.modalController.dismiss();
+  }
+
+  addPlace() {
+    if (this.placeForm.valid) {
+      const formData = this.placeForm.value;
+      console.log('TRIP ID', this.tripId);
+
+      //transforming the data to a PlaceResponse
+      const place: PlaceResponse = {
+        name: formData.name,
+        description: formData.description,
+        tripId: this.tripId,
+        location: {
+          type: 'Point',
+          coordinates: [formData.X, formData.Y],
+        },
+      };
+
+      console.log('PLACE BEFORE SEND', place)
+
+      console.log('Place:', place);
+      this.PlacesService.postPlace(place).subscribe({
+        next: (place) => console.log('Place created:', place),
+        error: (err) => console.log(err),
+      });
+    } else {
+      this.presentAlert();
+    }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'Please fill in all required fields correctly.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 
   ngOnInit() {
+    console.log('tripName', this.tripName, 'tripId', this.tripId)
   }
+
 }
 
-  //🚧🚧🚧🚧🚧
-  // // places: any[] = []; // Declare the 'places' property
-
-  // // addPlace(){
-  // //   //🚧🚧🚧 c'est quoi places ? 
-  // //   this.placesServiceService.getPlace().subscribe({
-  // //     next: place => this.places.push(place), // Use the 'places' property
-  // //     error: err => console.log(err),
-  // //   })
-  // // }
-
-  // async onCreatePlace(placeForm: any) {
-  //   // //création du header
-  //   // const headers = new HttpHeaders({
-  //   //   'Content-Type': 'application/json',
-  //   //   Authorization: `Bearer ${this.authToker}`
-  //   // });
-
-  //   if (placeForm.valid) {
-  //     // const formData = placeForm.value;
-  //     // console.log('Form Data:', formData);
-  //     // // Here, you can perform further actions with the form data, like sending it to a service or API
-  //     // try{
-  //     //   const response = await this.http.post(this.apiUrl, formData, { headers }).toPromise();
-  //     //   console.log('API Response:', response);
-  //     // } catch (error) {
-  //     //   console.error('API Error:', error);
-  //     // }
-  //     // console.log('data', this.places)
-
-
-
-  //   } else {
-  //     // Handle invalid form data by showing the custom alert if presentAlert is defined
-  //     if (this.presentAlert) {
-  //       await this.presentAlert.present();
-  //     }
-  //   }

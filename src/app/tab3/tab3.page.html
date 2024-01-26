@@ -55,6 +55,7 @@
             <ion-card-content>Voyage de l'utilisateur : {{ trip.userId }}</ion-card-content>
           </ion-col>
         </ion-row>
+        <ion-button expand="block" (click)="openAddPlaceModal(trip.title, trip.id)">Ajouter des places</ion-button>
       </ng-template>
     </ion-card>
 
@@ -70,3 +71,5 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
+

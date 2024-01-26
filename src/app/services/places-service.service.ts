@@ -21,4 +21,9 @@ export class PlacesService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<PlaceResponse>(url);
   }
+
+  //POST
+  postPlace(place: PlaceResponse): Observable<PlaceResponse> {
+    return this.http.post<PlaceResponse>(this.apiUrl, place);
+  }
 }

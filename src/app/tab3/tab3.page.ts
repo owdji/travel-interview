@@ -13,6 +13,8 @@ import { PlaceResponse } from '../models/place-response.type'; // added
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { AddPlacePage } from '../add-place/add-place.page';
 
 @Component({
   selector: 'app-tab3',
@@ -25,8 +27,8 @@ import { FormsModule } from '@angular/forms';
 export class Tab3Page {
   trips: TripResponse[];
   editingTripId: string | null = null;
-
   constructor(
+    private modalController: ModalController, // Inject ModalController
     private tripService: TripService,
     private router: Router, // Inject the Router service
     ) {
@@ -101,8 +103,23 @@ export class Tab3Page {
     });
   }
 
+
+
   cancelEdit() {
     this.editingTripId = null;
+  }
+
+  async openAddPlaceModal(tripName: string, tripId: any) {
+    const modal = await this.modalController.create({
+      component: AddPlacePage, // Specify the modal component
+      cssClass: 'add-place', // Optional CSS class for styling
+      componentProps: {
+        tripName: tripName, // Pass the trip name to the modal component
+        tripId: tripId
+      },
+    });
+
+    return await modal.present();
   }
   
 
