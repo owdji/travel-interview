@@ -12,6 +12,7 @@ import { TripResponse } from '../models/trip-response.type';
 import { PlaceResponse } from '../models/place-response.type'; // added
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tab3',
@@ -19,10 +20,11 @@ import { Router } from '@angular/router';
   styleUrls: ['tab3.page.scss'],
   standalone: true,
   // imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonicModule],
-  imports: [ExploreContainerComponent, IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, FormsModule, ExploreContainerComponent]
 })
 export class Tab3Page {
   trips: TripResponse[];
+  editingTripId: string | null = null;
 
   constructor(
     private tripService: TripService,
@@ -84,6 +86,23 @@ export class Tab3Page {
         error: (err) => console.log(err),
       });
     }
+  }
+
+  editTrip(trip: any) {
+    this.editingTripId = trip.id;
+  }
+  saveChanges(trip: TripResponse) {
+    this.tripService.editTrip(trip).subscribe({
+      next: () => {
+        // Retirer l'ID du voyage en cours d'édition
+        this.editingTripId = null;
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
+  cancelEdit() {
+    this.editingTripId = null;
   }
   
 

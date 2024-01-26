@@ -37,7 +37,12 @@ export class TripService {
     // const headers = new HttpHeaders({ 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDcxMjk3NDcuMDEsInN1YiI6ImE2NTA3MTMxLWNjZGMtNGU3Yi04MWNkLTI1YTBhNTkwNmIyOSIsImlhdCI6MTcwNTkyMDE0N30.rN-qkVcZhW9p4wbW8V8gb7Q8IaLQAII39shrqyceEeo'})
     // return this.http.post<TripResponse>(this.apiUrl, trip, {headers});
     return this.http.post<TripResponse>(this.apiUrl, trip);
+  }
 
+  //PATCH (EDIT)
+  editTrip(trip: TripResponse): Observable<TripResponse> {
+    const url = `${this.apiUrl}/${trip.id}`;
+    return this.http.patch<TripResponse>(url, trip);
   }
 
   //DELETE
