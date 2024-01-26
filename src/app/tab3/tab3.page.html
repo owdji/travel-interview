@@ -14,6 +14,7 @@
         (click)="editTrip(trip)"
         color="primary"
         size="large"
+        style="position: absolute; top: 8px; right: 8px;">
         *ngIf="!editingTripId"></ion-icon>
         
       <ion-grid *ngIf="editingTripId === trip.id; else displayMode">
