@@ -5,18 +5,19 @@ import { CommonModule } from '@angular/common';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import Map from 'ol/Map';
 import OSM from 'ol/source/OSM';
-import TileLayer from 'ol/layer/Tile';
 import View from 'ol/View';
 import Overlay from 'ol/Overlay';
-import Feature from 'ol/Feature';
-import Point from 'ol/geom/Point';
-import { Icon, Style } from 'ol/style';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
 import { transform } from 'ol/proj';
 import { useGeographic } from 'ol/proj';
 import { PlacesService } from '../services/places-service.service';
 import { PlaceResponse } from '../models/place-response.type';
+import Feature from 'ol/Feature';
+import { Cluster, Vector as VectorSource } from 'ol/source';
+import { Circle as CircleStyle, Fill, Icon, Stroke, Style, Text } from 'ol/style';
+import { LineString, Point, Polygon } from 'ol/geom';
+import { createEmpty, extend, getWidth, getHeight } from 'ol/extent';
+import { fromLonLat } from 'ol/proj';
+import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 
 @Component({
   selector: 'app-tab2',
@@ -37,7 +38,6 @@ export class Tab2Page implements OnInit {
   toggleButtonText = 'Activate Geolocation';
   vectorLayer: VectorLayer<VectorSource>;
   vectorSource: VectorSource;
-
 
   constructor(private placesService: PlacesService) {
     this.places = [];
@@ -212,12 +212,11 @@ export class Tab2Page implements OnInit {
       marker.style.borderRadius = '50%';
       marker.style.border = '2px solid #fff';
 
-      //Faudra changer avec les
+      //Faudra changer avec le lien de la page du lieu
       marker.addEventListener('click', () => {
         window.location.href = `/tabs/tab2/places/${place.id}`;
       });
       console.log('image added', marker);
-
 
       const overlay = new Overlay({
         element: marker,
