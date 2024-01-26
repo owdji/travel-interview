@@ -36,6 +36,14 @@ export const routes: Routes = [
     loadComponent: () => import('./places/places.page').then( m => m.PlacesPage),
     canActivate: [onlyAuthenticated]
   },
+  {
+    path: 'edit-trip',
+    loadComponent: () => import('./edit-trip/edit-trip.page').then( m => m.EditTripPage)
+  },
+  {
+    path: 'edit-place',
+    loadComponent: () => import('./edit-place/edit-place.page').then( m => m.EditPlacePage)
+  },
 ];
 
 @NgModule({
