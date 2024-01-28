@@ -5,7 +5,7 @@ Ce projet réalisé dans le cadre du cours DevMobil à été réalisé par Omar 
 ## Login/Register
 La première étape de l'application consiste à créer un compte et à se connecter. Automatiquement, l'application vous propose de vous connecter (login).
 
-![login page](images/localhost_8100_login.png){width=300px}
+<img src="images/localhost_8100_login.png" alt="login page" width="300">
  Si vous n'avez pas de compte, vous pouvez en créer un via la page de registration. Une fois votre compte créé, vous serez redirigé vers la page de login, qui vous conduira ensuite à la page d'accueil.
 
 ![Register Page](images/localhost_8100_register.png){width=300px}
@@ -39,5 +39,4 @@ De les supprimers.
 ![Delete Trips](images/delete.png){width=300px}
 
 Et d'ajouter des endroits visités lors de voyages.
-![Add places](images/add-places.png){width=300px}
-gi
+<img src="images/add-places.png" alt="Add places" width="300">
