@@ -1,10 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>add-trip</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create a new trip</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- create a small description of the trip -->
+  <p>
+    <ion-text class="ion-text-center">
+      <h1>Let's create a new trip !</h1>
+    </ion-text>
+  </p>
+
   <!-- <ion-card>
     <ion-card-header>
       <ion-icon name="airplane"></ion-icon>
@@ -30,15 +40,17 @@
       <ion-button expand="full" color="primary">Create</ion-button>
     </ion-card-content>
   </ion-card> -->
-    <ion-item>
-      <ion-label position="floating">Title</ion-label>
-      <ion-input type="text" [(ngModel)]="tripTitle"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label position="floating">Description</ion-label>
-      <ion-input type="text" [(ngModel)]="tripDescription"></ion-input>
-    </ion-item>
-  
-    <ion-button expand="full" color="primary" (click)="postTrip()">Create Trip</ion-button>
-  </ion-content>
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input type="text" [(ngModel)]="tripTitle"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-input type="text" [(ngModel)]="tripDescription"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" color="primary" (click)="postTrip()"
+    >Create Trip</ion-button
+  >
+</ion-content>

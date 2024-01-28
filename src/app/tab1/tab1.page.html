@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> Home </ion-title>
+    <ion-title>Home</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon [icon]="logOutIcon"></ion-icon>
@@ -9,37 +9,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center">
   <app-explore-container name="Tab 1 page"></app-explore-container>
 
-  <div class="welcome-text">
-    <h1>Welcome to the Travel Interview App!</h1>
-    <p>Start planning your next adventure with us.</p>
+  <div class="ion-text-center">
+    <img src="assets/icon/favicon.png" />
+    <h1>Welcome to the Travel Interview app</h1>
+  </div>
+  <div class="ion-text-justify">
+    <p>
+      Travel Interview is a mobile application that allows you to create trips
+      and places. You can also edit them and delete them.
+    </p>
   </div>
 
-
-
-
-  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
-      <ion-icon name="add-circle-outline"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top"> -->
-      <!-- Add Place Button -->
-      <!-- <ion-fab-button href="/add-place">
-        <ion-icon name="pin-outline"></ion-icon>
-      </ion-fab-button> -->
-
-      <!-- Add Trip Button -->
-      <!-- <ion-fab-button href="/add-trip">
-        <ion-icon name="airplane-outline"></ion-icon>
-      </ion-fab-button> -->
-
-      <!-- Edit Trips/Places Button -->
-      <!-- <ion-fab-button href="/edit-trips-places">
-        <ion-icon name="create-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab> -->
+  <h2>My last trips</h2>
+  <ion-list [inset]="true">
+    <ion-item *ngFor="let trip of trips">
+      <ion-label>
+        <h2>{{ trip.title }}</h2>
+        <p>{{ trip.description }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

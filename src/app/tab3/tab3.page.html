@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <ion-button expand="full" size="large" (click)="postTrip()">Create Trip</ion-button>
+  <!-- <ion-button expand="full" size="large" (click)="postTrip()">Create Trip</ion-button> -->
 
   <!-- Iterate over each trip in the 'trips' array -->
   <ion-item-sliding *ngFor="let trip of trips">
@@ -10,7 +10,8 @@
         name="trash-outline"
         (click)="deleteTrip(trip)"
         color="danger"
-        size="large"></ion-icon>
+        size="large"
+      ></ion-icon>
 
       <ion-grid>
         <ion-row>
@@ -23,9 +24,15 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-card-content>Nombre de lieu visité : {{ trip.placesCount }}</ion-card-content>
-            <ion-card-content>Date du voyage : {{ trip.createdAt }}</ion-card-content>
-            <ion-card-content>Voyage de l'utilisateur : {{ trip.userId }}</ion-card-content>
+            <ion-card-content
+              >Nombre de lieu visité : {{ trip.placesCount }}</ion-card-content
+            >
+            <ion-card-content
+              >Date du voyage : {{ trip.createdAt }}</ion-card-content
+            >
+            <ion-card-content
+              >Voyage de l'utilisateur : {{ trip.userId }}</ion-card-content
+            >
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -33,7 +40,9 @@
 
     <!-- Sliding options -->
     <ion-item-options side="end">
-      <ion-item-option color="danger" (click)="deleteTrip(trip)">Delete</ion-item-option>
+      <ion-item-option color="danger" (click)="deleteTrip(trip)"
+        >Delete</ion-item-option
+      >
     </ion-item-options>
   </ion-item-sliding>
 
