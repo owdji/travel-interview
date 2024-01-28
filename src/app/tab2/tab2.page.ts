@@ -214,7 +214,7 @@ export class Tab2Page implements OnInit {
 
       //Faudra changer avec le lien de la page du lieu
       marker.addEventListener('click', () => {
-        window.location.href = `/tabs/tab2/places/${place.id}`;
+        window.location.href = `/tabs/tab3/places/${place.id}`;
       });
       console.log('image added', marker);
 

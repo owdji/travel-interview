@@ -3,10 +3,12 @@ import { IonHeader, IonToolbar, IonTitle, IonContent ,IonText ,IonList ,IonItemS
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { IonFab, IonFabButton, IonIcon, IonFabList, IonButton,  IonButtons} from '@ionic/angular/standalone';
 import { AuthService } from '../security/auth.service';
-import { logOut as logOutIcon } from "ionicons/icons";
+import { image, logOut as logOutIcon } from "ionicons/icons";
 import { Router } from "@angular/router";
-
+import { TripResponse } from '../models/trip-response.type';
 import { TripService } from '../services/trips-service.service';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tab1',
