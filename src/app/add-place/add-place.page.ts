@@ -74,7 +74,6 @@ export class AddPlacePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('tripName', this.tripName, 'tripId', this.tripId)
   }
 
 }

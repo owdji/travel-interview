@@ -201,8 +201,8 @@ export class Tab2Page implements OnInit {
   addPlaceMarker(place: PlaceResponse) {
     if (place && place.location && place.location.coordinates) {
       const coordinates = place.location.coordinates;
-      const image = place.pictureUrl;
-
+      const image = place.pictureUrl || 'https://ik.imagekit.io/demo/medium_cafe_B1iTdD0C.jpg';
+  
       const marker = document.createElement('div');
       marker.setAttribute('class', 'place-marker');
       marker.style.width = '70px';
@@ -211,22 +211,21 @@ export class Tab2Page implements OnInit {
       marker.style.backgroundSize = 'cover';
       marker.style.borderRadius = '50%';
       marker.style.border = '2px solid #fff';
-
-      //Faudra changer avec le lien de la page du lieu
+  
+      // Faudra changer avec le lien de la page du lieu
       marker.addEventListener('click', () => {
         window.location.href = `/tabs/tab3/places/${place.id}`;
       });
-      console.log('image added', marker);
-
+  
       const overlay = new Overlay({
         element: marker,
         positioning: 'center-center',
         stopEvent: false,
         offset: [0, 0],
       });
-
+  
       overlay.setPosition(coordinates);
       this.map.addOverlay(overlay);
     }
-  }
+  }  
 }
