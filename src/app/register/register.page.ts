@@ -42,17 +42,17 @@ export class RegisterPage implements OnInit {
         console.log(data);
 
         // Ajouter un message à l'utilisateur
-        this.presentToast('Votre compte a été créé avec succès ! Vous pouvez maintenant vous connecter.');
+        this.presentToast('Your account has been created. You can now log in.');
 
         // Rediriger l'utilisateur vers la page de login (assurez-vous d'avoir la bonne URL)
         this.router.navigateByUrl('/login');
       },
       (error) => {
-        console.error('Erreur lors de la requête POST:', error);
+        console.error('Error with the post request', error);
 
         // Ajouter un message d'erreur à l'utilisateur
         alert(
-          'Erreur lors de la création du compte. Veuillez réessayer plus tard.'
+          'An error occurred when creating your account. Please check your internet connection and try again.'
         );
       }
     );

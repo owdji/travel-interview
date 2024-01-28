@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { TripResponse } from '../models/trip-response.type';
 import { IonFab, IonFabButton, IonIcon, IonFabList, IonButton,  IonButtons} from '@ionic/angular/standalone';
-// import { AuthService } from "src/app/security/auth.service";
 import { AuthService } from '../security/auth.service';
 import { logOut as logOutIcon } from "ionicons/icons";
 import { Router } from "@angular/router";
+
 
 
 @Component({
@@ -19,6 +16,7 @@ import { Router } from "@angular/router";
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonFab,IonFabButton, IonIcon, IonFabList, IonButton, IonButtons]
 })
 export class Tab1Page {
+  user$ = this.auth.getUser$();
   readonly logOutIcon = logOutIcon;
 
   constructor(
@@ -28,7 +26,8 @@ export class Tab1Page {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   // Add a method to log out.
   logOut() {
