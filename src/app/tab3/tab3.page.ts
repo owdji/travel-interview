@@ -12,6 +12,9 @@ import { TripResponse } from '../models/trip-response.type';
 import { PlaceResponse } from '../models/place-response.type'; // added
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { AddPlacePage } from '../add-place/add-place.page';
 
 @Component({
   selector: 'app-tab3',
@@ -19,12 +22,13 @@ import { Router } from '@angular/router';
   styleUrls: ['tab3.page.scss'],
   standalone: true,
   // imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonicModule],
-  imports: [ExploreContainerComponent, IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, FormsModule, ExploreContainerComponent]
 })
 export class Tab3Page {
   trips: TripResponse[];
-
+  editingTripId: string | null = null;
   constructor(
+    private modalController: ModalController, // Inject ModalController
     private tripService: TripService,
     private router: Router, // Inject the Router service
     ) {
@@ -84,6 +88,38 @@ export class Tab3Page {
         error: (err) => console.log(err),
       });
     }
+  }
+
+  editTrip(trip: any) {
+    this.editingTripId = trip.id;
+  }
+  saveChanges(trip: TripResponse) {
+    this.tripService.editTrip(trip).subscribe({
+      next: () => {
+        // Retirer l'ID du voyage en cours d'édition
+        this.editingTripId = null;
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
+
+
+  cancelEdit() {
+    this.editingTripId = null;
+  }
+
+  async openAddPlaceModal(tripName: string, tripId: any) {
+    const modal = await this.modalController.create({
+      component: AddPlacePage, // Specify the modal component
+      cssClass: 'add-place', // Optional CSS class for styling
+      componentProps: {
+        tripName: tripName, // Pass the trip name to the modal component
+        tripId: tripId
+      },
+    });
+
+    return await modal.present();
   }
   
 

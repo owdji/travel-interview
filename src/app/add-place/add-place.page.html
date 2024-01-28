@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>add-place</ion-title>
     <ion-back-button default-href="/tabs/tab3"></ion-back-button>
@@ -6,8 +6,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <form #placeForm="ngForm" (ngSubmit)="onCreatePlace(placeForm)"> -->
-  <form #placeForm="ngForm">
+    <form #placeForm="ngForm">
+
     <ion-item>
       <ion-label position="floating">Name</ion-label>
       <ion-input type="text" name="name" ngModel required></ion-input>
@@ -35,9 +35,58 @@
 
     <ion-button type="submit" expand="full">Create Place</ion-button>
   </form>
-  <!-- <p>
-    <button type="button" (click)="getTrip()">GET TRIP TEST</button>
-  </p> -->
+  
+  <ion-alert
+    #presentAlert
+    header="Error"
+    message="Please fill in all required fields correctly."
+    [buttons]="'OK'"
+  ></ion-alert>
+</ion-content> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      >Ajouter des places à <span class="bold">{{ tripName }}</span></ion-title
+    >
+    <!-- Use the trip name dynamically -->
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #placeForm="ngForm" (ngSubmit)="addPlace()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" name="name" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea name="description" ngModel required></ion-textarea>
+    </ion-item>
+
+    <div style="display: flex; flex-direction: row">
+      <ion-item>
+        <ion-label position="floating">Coordonées X</ion-label>
+        <ion-input type="number" name="X" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Coordonées Y</ion-label>
+        <ion-input type="number" name="Y" ngModel required></ion-input>
+      </ion-item>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Picture URL (optional)</ion-label>
+      <ion-input type="text" name="pictureUrl" ngModel></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" expand="full">Create Place</ion-button>
+  </form>
 
   <ion-alert
     #presentAlert

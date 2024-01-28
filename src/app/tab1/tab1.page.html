@@ -9,27 +9,52 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding ion-text-center">
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Home </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-  <div class="ion-text-center">
-    <img src="assets/icon/favicon.png" />
-    <h1>Welcome to the Travel Interview app</h1>
-  </div>
-  <div class="ion-text-justify">
+  <div class="ion-padding">
+    <h1>Welcome to Travel log app !</h1>
     <p>
-      Travel Interview is a mobile application that allows you to create trips
-      and places. You can also edit them and delete them.
+      Create by the Travel-Interview group, composed of Omar Gonin, Andrea
+      Ferrer, Lionel Sandoz and Léo Chollet
     </p>
+    <ul>
+      <li>
+        You can view all the places visted via the
+        <a href="/tabs/tab2">map</a> or you can view a
+        <a href="/places">list</a>
+      </li>
+      <li>
+        You can create, edit and delete trips via the
+        <a href="/tabs/tab3">trips</a> page (also available on the bottom right
+        tab)
+      </li>
+    </ul>
   </div>
 
-  <h2>My last trips</h2>
-  <ion-list [inset]="true">
-    <ion-item *ngFor="let trip of trips">
-      <ion-label>
-        <h2>{{ trip.title }}</h2>
-        <p>{{ trip.description }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top"> -->
+  <!-- Add Place Button -->
+  <!-- <ion-fab-button href="/add-place">
+        <ion-icon name="pin-outline"></ion-icon>
+      </ion-fab-button> -->
+
+  <!-- Add Trip Button -->
+  <!-- <ion-fab-button href="/add-trip">
+        <ion-icon name="airplane-outline"></ion-icon>
+      </ion-fab-button> -->
+
+  <!-- Edit Trips/Places Button -->
+  <!-- <ion-fab-button href="/edit-trips-places">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab> -->
 </ion-content>

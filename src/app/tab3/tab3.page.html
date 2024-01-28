@@ -1,6 +1,4 @@
 <ion-content [fullscreen]="true">
-  <!-- <ion-button expand="full" size="large" (click)="postTrip()">Create Trip</ion-button> -->
-
   <!-- Iterate over each trip in the 'trips' array -->
   <ion-item-sliding *ngFor="let trip of trips">
     <!-- Card content -->
@@ -13,7 +11,45 @@
         size="large"
       ></ion-icon>
 
-      <ion-grid>
+      <ion-icon
+        name="create-outline"
+        (click)="editTrip(trip)"
+        color="primary"
+        size="large"
+        style="position: absolute; top: 8px; right: 8px"
+      >
+        *ngIf="!editingTripId"></ion-icon
+      >
+
+      <ion-grid *ngIf="editingTripId === trip.id; else displayMode">
+        <ion-row>
+          <ion-col>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-input
+                  [(ngModel)]="trip.title"
+                  placeholder="Title"
+                ></ion-input>
+              </ion-card-title>
+              <ion-card-subtitle>
+                <ion-input
+                  [(ngModel)]="trip.description"
+                  placeholder="Description"
+                ></ion-input>
+              </ion-card-subtitle>
+            </ion-card-header>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card-content>
+              <ion-button (click)="saveChanges(trip)">Save Changes</ion-button>
+              <ion-button (click)="cancelEdit()">Cancel</ion-button>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ng-template #displayMode>
         <ion-row>
           <ion-col>
             <ion-card-header>
@@ -35,7 +71,12 @@
             >
           </ion-col>
         </ion-row>
-      </ion-grid>
+        <ion-button
+          expand="block"
+          (click)="openAddPlaceModal(trip.title, trip.id)"
+          >Ajouter des places</ion-button
+        >
+      </ng-template>
     </ion-card>
 
     <!-- Sliding options -->

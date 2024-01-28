@@ -1,10 +1,10 @@
 export interface PlaceResponse {
-    id: number;
+    id?: number;
     name: string;
     description: string;
-    pictureUrl: string;
-    tripId: number;
-    tripHref: string;
+    pictureUrl?: string;
+    tripId: string;
+    tripHref?: string;
     location: {
       type: string;
       coordinates: number[];

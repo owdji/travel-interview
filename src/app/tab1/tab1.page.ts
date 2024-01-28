@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent ,IonText ,IonList ,IonItemSliding ,IonItemOptions, IonItem ,IonLabel } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { TripResponse } from '../models/trip-response.type';
 import { IonFab, IonFabButton, IonIcon, IonFabList, IonButton,  IonButtons} from '@ionic/angular/standalone';
-// import { AuthService } from "src/app/security/auth.service";
 import { AuthService } from '../security/auth.service';
 import { logOut as logOutIcon } from "ionicons/icons";
 import { Router } from "@angular/router";
+
 import { TripService } from '../services/trips-service.service';
 
 @Component({
@@ -19,6 +16,7 @@ import { TripService } from '../services/trips-service.service';
   imports: [IonLabel, IonItemOptions, IonItemSliding, IonList, IonText, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonFab,IonFabButton, IonIcon, IonFabList, IonButton, IonButtons, IonItem, CommonModule]
 })
 export class Tab1Page {
+  user$ = this.auth.getUser$();
   trips: TripResponse[];
   readonly logOutIcon = logOutIcon;
 
@@ -33,6 +31,7 @@ export class Tab1Page {
   }
 
   ngOnInit() {
+  
     this.getTrips();
   }
 

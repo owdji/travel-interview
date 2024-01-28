@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>edit-place</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Edit Places</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Place form fields here -->
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Location</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Number of Habitants</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <!-- List of locations with edit buttons -->
+      <ion-list>
+        <ion-item>
+          <ion-label>Location 1</ion-label>
+          <ion-button slot="end" fill="clear">Edit</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-label>Location 2</ion-label>
+          <ion-button slot="end" fill="clear">Edit</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-label>Location 3</ion-label>
+          <ion-button slot="end" fill="clear">Edit</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

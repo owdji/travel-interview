@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>edit-trip</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Edit Trips</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Trip form fields here -->
+      <ion-item>
+        <ion-label>Start Location</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Arrival Location(s)</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <!-- List of trips with edit buttons -->
+      <ion-list>
+        <ion-item>
+          <ion-label>Trip 1 (One Arrival Location)</ion-label>
+          <ion-button slot="end" fill="clear">Edit</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-label>Trip 2 (Multiple Arrival Locations)</ion-label>
+          <ion-button slot="end" fill="clear">Edit</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-label>Trip 3 (Multiple Arrival Locations)</ion-label>
+          <ion-button slot="end" fill="clear">Edit</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
