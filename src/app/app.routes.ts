@@ -27,11 +27,6 @@ export const routes: Routes = [
     canActivate: [onlyAuthenticated]
   },
   {
-    path: 'edit-trips-places',
-    loadComponent: () => import('./edit-trips-places/edit-trips-places.page').then( m => m.EditTripsPlacesPage),
-    canActivate: [onlyAuthenticated]
-  },
-  {
     path: 'places',
     loadComponent: () => import('./places/places.page').then( m => m.PlacesPage),
     canActivate: [onlyAuthenticated]
@@ -39,10 +34,6 @@ export const routes: Routes = [
   {
     path: 'edit-trip',
     loadComponent: () => import('./edit-trip/edit-trip.page').then( m => m.EditTripPage)
-  },
-  {
-    path: 'edit-place',
-    loadComponent: () => import('./edit-place/edit-place.page').then( m => m.EditPlacePage)
   },
 ];
 
