@@ -9,18 +9,23 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { IonicModule } from '@ionic/angular';
 import { TripService } from '../services/trips-service.service';
 import { TripResponse } from '../models/trip-response.type';
-import { PlaceResponse } from '../models/place-response.type'; // added
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { AddPlacePage } from '../add-place/add-place.page';
+import { User } from '../security/user.model';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../security/auth.service';
+
+const API_URL = "https://comem-travel-log-api-2hr8.onrender.com/api/";
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: true,
+  providers: [AuthService], 
   // imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonicModule],
   imports: [IonicModule, CommonModule, FormsModule, ExploreContainerComponent]
 })
@@ -30,7 +35,10 @@ export class Tab3Page {
   constructor(
     private modalController: ModalController, // Inject ModalController
     private tripService: TripService,
+    private http: HttpClient,
     private router: Router, // Inject the Router service
+    private auth: AuthService,
+    private authService: AuthService, // Add this line
     ) {
     this.trips = [];
     
@@ -38,7 +46,14 @@ export class Tab3Page {
 
   getTrips() {
     this.tripService.getTrips().subscribe({
-      next: (trips) => (this.trips = trips),
+      next: (trips) => {
+        this.trips = trips;
+        this.trips.forEach((trip) => {
+          this.authService.getUserById$(trip.userId as string).subscribe((user: User) => {
+            trip.user = user;
+          });
+        });
+      },
       error: (err) => console.log(err),
     });
   }

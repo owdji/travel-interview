@@ -64,10 +64,12 @@
               >Nombre de lieu visité : {{ trip.placesCount }}</ion-card-content
             >
             <ion-card-content
-              >Date du voyage : {{ trip.createdAt }}</ion-card-content
+              >Date de création du voyage : {{ trip.createdAt | date: 'dd/MM/yyyy HH:mm'
+              }}</ion-card-content
             >
+
             <ion-card-content
-              >Voyage de l'utilisateur : {{ trip.userId }}</ion-card-content
+              >Voyage de l'utilisateur : {{ trip.user?.name }}</ion-card-content
             >
           </ion-col>
         </ion-row>
