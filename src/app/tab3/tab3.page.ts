@@ -43,35 +43,12 @@ export class Tab3Page {
     });
   }
 
-  postTrip(){
-    //here is what a trip looks like
-    // id: string;
-    // href: string;
-    // title: string;
-    // description: string;
-    // userId: string;
-    // createdAt: string;
-    // updatedAt: string;
-    // places: PlaceResponse[];
-    // placesCount: number;
-    const trip: TripResponse = {
-      title: 'Seoul with the boys',
-      description: 'lets goooo',
-    };
-    
-    this.tripService.postTrip(trip).subscribe({
-      next: (trip) => this.caMarche(trip),
-      error: (err) => console.log(err),
-    });
-
-  }
-
   caMarche(trip: any) {
     console.log("ca marche", trip);
     this.trips.push(trip);
   }
 
-  navigateToAddPlace(){
+  navigateToAddTrip(){
     this.router.navigate(['/add-trip']);
   }
 

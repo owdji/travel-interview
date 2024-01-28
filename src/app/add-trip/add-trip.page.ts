@@ -56,7 +56,7 @@ export class AddTripPage implements OnInit {
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {
     const toast = await this.toastController.create({
-      message: `Le voyage "${this.tripTitle}" a bien été ajouté 🎉`,
+      message: `The trip "${this.tripTitle}" has been created 🎉`,
       duration: 5000,
       position: position,
     });
